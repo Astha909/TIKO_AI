@@ -1,4 +1,4 @@
-import torch
+import torch # type: ignore
 from tokenizer.tokenizer import SimpleTokenizer
 from preprocessing.clean_text import clean_text
 

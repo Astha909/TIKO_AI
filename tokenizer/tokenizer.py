@@ -7,7 +7,7 @@ class SimpleTokenizer:
         unique_words = set()
 
         for text in texts:
-            words = text.split()
+            words = text.replace("|", " ").split()
             unique_words.update(words)
 
         for index, word in enumerate(sorted(unique_words)):
@@ -16,7 +16,7 @@ class SimpleTokenizer:
 
         self.vocab_size = len(self.word_to_index)
     def encode(self, text):
-        words = text.split()
+        words = text.replace("|", " ").split()
 
         return [
             self.word_to_index[word]
