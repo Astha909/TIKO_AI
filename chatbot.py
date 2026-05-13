@@ -8,5 +8,16 @@ while True:
         print("Chatbot stopped")
         break
 
-    response = generate_response(user_input)
+    mode_input = user_input
+
+    if user_input.startswith("funny"):
+        mode_input = "funny " + user_input
+
+    elif user_input.startswith("sarcastic"):
+        mode_input = "sarcastic " + user_input
+
+    elif user_input.startswith("friendly"):
+        mode_input = "friendly " + user_input
+
+    response = generate_response(mode_input)
     print("Bot:", response)

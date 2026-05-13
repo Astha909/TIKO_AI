@@ -90,7 +90,18 @@ def generate_response(input_text):
             [predicted_token]
         )
 
-        if next_word in generated_words:
+        blocked_words = [
+            "CATEGORY",
+            "funny",
+            "friendly",
+            "sarcastic",
+            "chaotic"
+        ]
+
+        if (
+            next_word in generated_words
+            or next_word in blocked_words
+        ):
             break
 
         generated_words.append(next_word)
