@@ -44,26 +44,55 @@ model.load_state_dict(
 
 model.eval()
 
-input_text = "funny hello yo"
+def generate_response(input_text):
 
-encoded_input = tokenizer.encode(input_text)
+    encoded_input = tokenizer.encode(input_text)
 
-input_tensor = torch.tensor(
-    [encoded_input],
-    dtype=torch.long
-)
+    input_tensor = torch.tensor(
+        [encoded_input],
+        dtype=torch.long
+    )
 
-with torch.no_grad():
+    with torch.no_grad():
 
-    output = model(input_tensor)
+        output = model(input_tensor)
 
-    predicted_token = torch.argmax(
-        output[0, -1]
-    ).item()
+        predicted_token = torch.argmax(
+            output[0, -1]
+        ).item()
 
-predicted_word = tokenizer.decode(
-    [predicted_token]
-)
+    predicted_word = tokenizer.decode(
+        [predicted_token]
+    )
 
-print("Input:", input_text)
-print("Predicted:", predicted_word)
+    generated_words = [predicted_word]
+
+    for _ in range(5):
+
+        encoded_input = tokenizer.encode(
+            input_text + " " + " ".join(generated_words)
+        )
+
+        input_tensor = torch.tensor(
+            [encoded_input],
+            dtype=torch.long
+        )
+
+        with torch.no_grad():
+
+            output = model(input_tensor)
+
+            predicted_token = torch.argmax(
+                output[0, -1]
+            ).item()
+
+        next_word = tokenizer.decode(
+            [predicted_token]
+        )
+
+        if next_word in generated_words:
+            break
+
+        generated_words.append(next_word)
+
+    return " ".join(generated_words)
