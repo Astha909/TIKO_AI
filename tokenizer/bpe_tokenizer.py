@@ -128,16 +128,13 @@ class BPETokenizer:
     
 if __name__ == "__main__":
 
-    texts = [
-        "hello world",
-        "hello there",
-        "humor chatbot",
-        "funny response",
-        "chatting system",
-        "chatbot chatting",
-        "friendly chatting",
-        "advanced tokenizer"
-    ]
+    with open(
+        "dataset/balanced_dataset.txt",
+        "r",
+        encoding="utf-8"
+    ) as file:
+
+        texts = file.readlines()
 
     tokenizer = BPETokenizer()
 

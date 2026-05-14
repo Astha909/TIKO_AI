@@ -4,3 +4,11 @@ friendly|how are you|i am functioning surprisingly well
 sarcastic|what are you doing|questioning my existence
 funny|tell me a joke|my code works until someone watches
 friendly|good night|sleep before your bugs evolve
+sarcastic|How far is it from here to the airport?|It’s about an hour’s drive.
+friendly|I need to get there before ten.Can we make it?|I can’t promise, but I’ll do my best.
+confused|Hello, I bought a pen in your shop just before.|*laughs, body relaxed* Yes, thank you very much.
+sarcastic|Now I came back to the hotel and try to show it to my friend, the pen is broken, I am afraid.|Oh, is it?
+motivational|Would you change it to a new one?|Yes, certainly, you have the receipt?
+motivational|Yes, I do.|Then would you kindly come to our shop with the receipt by 10 o'clock, we'll replace it.
+chaotic|Do you have any seats available?|Yes. This way please.
+chaotic|What is the special today?|I recommend our New English Pizza.

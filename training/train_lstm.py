@@ -32,11 +32,17 @@ tokenizer.build_vocab(texts)
 encoded_data = []
 
 for text in texts:
+
     encoded_text = tokenizer.encode(text)
 
-    if len(encoded_text) > 1:
+    if (
+        len(encoded_text) > 1
+        and len(encoded_text) <= 50
+    ):
+
         encoded_data.append(encoded_text)
 
+encoded_data = encoded_data[:5000]
 
 input_sequences = []
 target_sequences = []
