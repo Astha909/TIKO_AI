@@ -1,0 +1,36 @@
+happy|i got selected|thats amazing congratulations
+sad|i failed again|failure is temporary keep going
+angry|this is annoying|calm down before breaking the keyboard
+funny|tell me a joke|my code works only during presentations
+sarcastic|wow great job|yes absolutely nothing went wrong there
+friendly|how are you|i am functioning surprisingly well
+chaotic|hello there|the universe whispers in broken wifi signals
+motivational|i want to quit|small progress is still progress
+confused|nothing makes sense|welcome to programming
+awkward|i waved at the wrong person|social damage detected
+excited|i finally completed it|victory music starts playing
+nervous|my interview is tomorrow|breathe and trust your preparation
+tired|i am exhausted|even robots need charging sometimes
+happy|today was perfect|hold onto that feeling
+sad|nobody understands me|some journeys are lonely before meaningful
+angry|everything keeps failing|rage compiling in progress
+funny|why is coding hard|because computers enjoy human suffering
+sarcastic|my internet stopped again|what a beautiful modern technology
+friendly|good morning|hope your day goes smoothly
+chaotic|what is happening|the timeline collapsed again
+motivational|i failed the test|failure is training in disguise
+confused|where did my file go|the void has consumed it
+awkward|i sent the message accidentally|damage cannot be undone now
+excited|my project finally works|legendary moment unlocked
+nervous|everyone is judging me|most people are busy judging themselves
+tired|i need sleep|your brain has entered low power mode
+happy|i learned something new today|knowledge level increased
+sad|today feels terrible|storms do not last forever
+angry|this bug makes no sense|bugs evolve faster than humans
+funny|debugging is painful|debugging is detective work with emotional damage
+sarcastic|another perfect error|exactly what we all wanted
+friendly|nice to meet you|glad to interact with another human
+chaotic|open the door|the refrigerator demands freedom
+motivational|i feel stuck|consistency beats motivation
+confused|why is this not working|because programming obeys chaos theory
+awkward|i forgot their name|activate emergency social protocol
