@@ -1,11 +1,26 @@
 from torch.nn.utils.rnn import pad_sequence
 
+from torch.utils.data import (
+    TensorDataset,
+    DataLoader
+)
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
 
 import sys
 import os
+
+
+device = torch.device(
+    "cuda"
+    if torch.cuda.is_available()
+    else "cpu"
+)
+
+print(device)
+
 
 sys.path.append(
     os.path.abspath(
@@ -29,7 +44,7 @@ with open(
     texts = file.readlines()
 
 
-texts = texts[:1000]
+texts = texts[:2000]
 
 
 tokenizer = SimpleTokenizer()
@@ -39,10 +54,14 @@ tokenizer.build_vocab(texts)
 
 encoded_data = []
 
+MAX_LENGTH = 128
+
 
 for text in texts:
 
     encoded_text = tokenizer.encode(text)
+
+    encoded_text = encoded_text[:MAX_LENGTH]
 
     if len(encoded_text) > 1:
 
@@ -90,13 +109,28 @@ target_padded = pad_sequence(
 )
 
 
+dataset = TensorDataset(
+    input_padded,
+    target_padded
+)
+
+BATCH_SIZE = 32
+
+
+dataloader = DataLoader(
+    dataset,
+    batch_size=BATCH_SIZE,
+    shuffle=True
+)
+
+
 VOCAB_SIZE = tokenizer.vocab_size
 
-EMBEDDING_DIM = 128
+EMBEDDING_DIM = 256
 
 NUM_HEADS = 4
 
-HIDDEN_DIM = 256
+HIDDEN_DIM = 512
 
 NUM_LAYERS = 2
 
@@ -114,6 +148,8 @@ model = TransformerModel(
     max_seq_length=MAX_SEQ_LENGTH
 )
 
+model = model.to(device)
+
 
 criterion = nn.CrossEntropyLoss()
 
@@ -127,55 +163,51 @@ print(input_padded.shape)
 
 print(target_padded.shape)
 
-output = model(input_padded)
 
-print(output.shape)
-
-
-output = output.reshape(
-    -1,
-    VOCAB_SIZE
-)
-
-targets = target_padded.reshape(-1)
-
-
-loss = criterion(
-    output,
-    targets
-)
-
-print(loss.item())
-
-EPOCHS = 10
+EPOCHS = 20
 
 
 for epoch in range(EPOCHS):
 
-    output = model(input_padded)
+    print(f"Starting Epoch {epoch+1}")
 
-    output = output.reshape(
-        -1,
-        VOCAB_SIZE
-    )
+    total_loss = 0
 
-    targets = target_padded.reshape(-1)
+    for batch_inputs, batch_targets in dataloader:
 
-    loss = criterion(
-        output,
-        targets
-    )
+        batch_inputs = batch_inputs.to(device)
 
-    optimizer.zero_grad()
+        batch_targets = batch_targets.to(device)
 
-    loss.backward()
+        output = model(batch_inputs)
 
-    optimizer.step()
+        output = output.reshape(
+            -1,
+            VOCAB_SIZE
+        )
+
+        targets = batch_targets.reshape(-1)
+
+        loss = criterion(
+            output,
+            targets
+        )
+
+        optimizer.zero_grad()
+
+        loss.backward()
+
+        optimizer.step()
+
+        total_loss += loss.item()
+
+    avg_loss = total_loss / len(dataloader)
 
     print(
         f"Epoch {epoch+1}/{EPOCHS}, "
-        f"Loss: {loss.item():.4f}"
+        f"Loss: {avg_loss:.4f}"
     )
+
 
 torch.save(
     model.state_dict(),

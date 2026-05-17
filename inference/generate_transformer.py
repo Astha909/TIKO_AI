@@ -25,7 +25,7 @@ with open(
     texts = file.readlines()
 
 
-texts = texts[:1000]
+texts = texts[:2000]
 
 
 tokenizer = SimpleTokenizer()
@@ -35,11 +35,11 @@ tokenizer.build_vocab(texts)
 
 VOCAB_SIZE = tokenizer.vocab_size
 
-EMBEDDING_DIM = 128
+EMBEDDING_DIM = 256
 
 NUM_HEADS = 4
 
-HIDDEN_DIM = 256
+HIDDEN_DIM = 512
 
 NUM_LAYERS = 2
 
