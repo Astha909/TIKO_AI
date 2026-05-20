@@ -82,16 +82,22 @@ with torch.no_grad():
 
     output = model(input_tensor)
 
-    predicted_token = torch.argmax(
-        output[0, -1]
+    logits = output[0, -1]
+
+    temperature = 0.8
+
+    logits = logits / temperature
+
+    probabilities = torch.softmax(
+        logits,
+        dim=-1
+    )
+
+    predicted_token = torch.multinomial(
+        probabilities,
+        num_samples=1
     ).item()
-
-
-generated_word = tokenizer.index_to_word.get(
-    predicted_token,
-    "<UNK>"
-)
-
+    
 
 print("Prompt:", prompt)
 
