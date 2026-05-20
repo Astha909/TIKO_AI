@@ -97,7 +97,12 @@ with torch.no_grad():
         probabilities,
         num_samples=1
     ).item()
-    
+
+    generated_word = tokenizer.index_to_word.get(
+        predicted_token,
+        "<UNK>"
+    )
+
 
 print("Prompt:", prompt)
 
