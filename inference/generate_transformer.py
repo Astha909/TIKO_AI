@@ -88,15 +88,26 @@ with torch.no_grad():
 
     logits = logits / temperature
 
-    probabilities = torch.softmax(
+    top_k = 20
+
+    top_logits, top_indices = torch.topk(
         logits,
+        top_k
+    )
+
+    filtered_probabilities = torch.softmax(
+        top_logits,
         dim=-1
     )
 
-    predicted_token = torch.multinomial(
-        probabilities,
+    sampled_index = torch.multinomial(
+        filtered_probabilities,
         num_samples=1
     ).item()
+
+    predicted_token = top_indices[
+        sampled_index
+    ].item()
 
     generated_word = tokenizer.index_to_word.get(
         predicted_token,
